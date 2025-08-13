@@ -422,7 +422,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::category.category'
     >;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    cover: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -430,6 +431,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
       }>;
+    featuredMedia: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -437,7 +439,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -530,7 +532,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
         maxLength: 50;
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID &
+    slug: Schema.Attribute.UID<'name'> &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
       }>;
@@ -555,14 +558,14 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
-    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    favicon: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::global.global'
     > &
       Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files'>;
     publishedAt: Schema.Attribute.DateTime;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -615,7 +618,8 @@ export interface ApiTagTag extends Struct.CollectionTypeSchema {
         maxLength: 50;
       }>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID &
+    slug: Schema.Attribute.UID<'name'> &
+      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 50;
       }>;

@@ -15,18 +15,27 @@
     "title": {
       "type": "string"
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
     "description": {
       "type": "text",
       "maxLength": 80
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "cover": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "featuredMedia": {
+      "type": "media",
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files",

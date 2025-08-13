@@ -29,6 +29,8 @@
     },
     "slug": {
       "type": "uid",
+      "targetField": "name",
+      "required": true,
       "maxLength": 50
     },
     "description": {
